@@ -48,7 +48,13 @@ $routes->get('/hola/expresion/([a-z]+)/(\d+)', 'Hola_controller::parametrosActio
 
 $routes->get('/hola/vista', 'Hola_controller::vistaAction');
 
-$routes->get('/persona/vista', 'Hola_controller::vistaAction');
+$routes->get('/persona/datos/(:any)/(:num)', 'Persona_controller::mostrarDatosAction/$1/$2');
+
+// PERSONA
+$routes->get('/persona/datos/(:any)/(:num)', 'Persona_controller::mostrarDatosAction/$1/$2');
+$routes->get('/persona/datoslaborales/(:any)/(:num)', 'Persona_controller::datosLaboralesAction/$1/$2');
+$routes->get('/persona/listar', 'Persona_controller::listarAction');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
