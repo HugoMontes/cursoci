@@ -55,6 +55,10 @@ $routes->get('/persona/datos/(:any)/(:num)', 'Persona_controller::mostrarDatosAc
 $routes->get('/persona/datoslaborales/(:any)/(:num)', 'Persona_controller::datosLaboralesAction/$1/$2');
 $routes->get('/persona/listar', 'Persona_controller::listarAction');
 
+// CALCULADORA
+$routes->get('/calculadora/aritmetica/(:num)/(:num)', 'Calculadora_controller::calculosAritemicosAction/$1/$2');
+$routes->get('/calculadora/geometrica/(:num)/(:num)', 'Calculadora_controller::calculosGeometricosAction/$1/$2');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
