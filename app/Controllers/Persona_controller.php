@@ -9,6 +9,8 @@ class Persona_controller extends BaseController {
         $data['nombre'] = $nombre;
         $data['edad'] = $edad;
         $data['observacion'] = $edad?'Mayor de edad':'Menor de edad';
+        // Adicionar un titulo
+        $data['title'] = 'Datos Personales';
         return view('persona/datos_view', $data);
     }
 
