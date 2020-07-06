@@ -10,6 +10,14 @@ class Rectangulo{
         $this->altura = $altura;
     }
 
+    public function setBase($base){
+        $this->base = $base;
+    }
+
+    public function setAltura($altura){
+        $this->altura = $altura;
+    }
+
     public function getArea(){
         $area = $this->base * $this->altura;
         return $area;

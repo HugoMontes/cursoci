@@ -1,7 +1,7 @@
 <?php namespace App\Controllers;
 
 // Importar la libreria
-use App\Libraries\Rectangulo;
+// use App\Libraries\Rectangulo;
 
 class Calculadora_controller extends BaseController {
 
@@ -10,7 +10,7 @@ class Calculadora_controller extends BaseController {
     
     public function calculosAritemicosAction($valora, $valorb){
         // Invocar al helper
-        helper('calculadora');
+        // helper('calculadora');
         $data['valora'] = $valora;
         $data['valorb'] = $valorb;
         return view('calculadora/helper_view',$data);
@@ -18,10 +18,12 @@ class Calculadora_controller extends BaseController {
 
     public function calculosGeometricosAction($base, $altura){
         // Instanciar a la libreria
-        $rectangulo = new Rectangulo($base, $altura);
+        // $rectangulo = new Rectangulo($base, $altura);
+        $this->rectangulo->setBase($base);
+        $this->rectangulo->setAltura($altura);
         // Crear las variables para la vista
-        $data['perimetro'] = $rectangulo->getPerimetro();
-        $data['area'] = $rectangulo->getArea();
+        $data['perimetro'] = $this->rectangulo->getPerimetro();
+        $data['area'] = $this->rectangulo->getArea();
         // Invocar a la vista
         return view('calculadora/libreria_view',$data);
     }

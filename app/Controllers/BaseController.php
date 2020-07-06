@@ -1,6 +1,9 @@
 <?php
 namespace App\Controllers;
 
+// Importar la libreria
+use App\Libraries\Rectangulo;
+
 /**
  * Class BaseController
  *
@@ -26,8 +29,9 @@ class BaseController extends Controller
 	 *
 	 * @var array
 	 */
-	protected $helpers = [];
+	protected $helpers = ['calculadora'];
 
+	public $rectangulo;
 	/**
 	 * Constructor.
 	 */
@@ -41,6 +45,7 @@ class BaseController extends Controller
 		//--------------------------------------------------------------------
 		// E.g.:
 		// $this->session = \Config\Services::session();
+		$this->rectangulo = new Rectangulo(0, 0);
 	}
 
 }
