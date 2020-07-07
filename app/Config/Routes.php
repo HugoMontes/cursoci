@@ -30,7 +30,8 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+// $routes->get('/', 'Home::index');
+$routes->get('/', 'Home_controller::index');
 
 $routes->get('/hola/ruta', function(){
 	echo 'Hola desde Routes.php con la funcion get';
