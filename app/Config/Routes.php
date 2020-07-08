@@ -41,6 +41,7 @@ $routes->add('/hola/ruta/add', function(){
 	echo 'Hola desde Routes.php con la funcion add';
 });
 
+
 $routes->get('/hola/controlador', 'Hola_controller::index');
 
 $routes->get('/hola/parametros/(:any)/(:num)', 'Hola_controller::parametrosAction/$1/$2');
@@ -48,8 +49,6 @@ $routes->get('/hola/parametros/(:any)/(:num)', 'Hola_controller::parametrosActio
 $routes->get('/hola/expresion/([a-z]+)/(\d+)', 'Hola_controller::parametrosAction/$1/$2');
 
 $routes->get('/hola/vista', 'Hola_controller::vistaAction');
-
-$routes->get('/persona/datos/(:any)/(:num)', 'Persona_controller::mostrarDatosAction/$1/$2');
 
 // PERSONA
 $routes->get('/persona/datos/(:any)/(:num)', 'Persona_controller::mostrarDatosAction/$1/$2');
@@ -59,6 +58,10 @@ $routes->get('/persona/listar', 'Persona_controller::listarAction');
 // CALCULADORA
 $routes->get('/calculadora/aritmetica/(:num)/(:num)', 'Calculadora_controller::calculosAritemicosAction/$1/$2');
 $routes->get('/calculadora/geometrica/(:num)/(:num)', 'Calculadora_controller::calculosGeometricosAction/$1/$2');
+
+// TAREAS
+$routes->get('/practica/productos', 'Hola_controller::practicaAction');
+
 
 /**
  * --------------------------------------------------------------------

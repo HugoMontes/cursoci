@@ -16,4 +16,8 @@ class Hola_controller extends BaseController {
         return view('hola/hola_vista');
     }
 
+    public function practicaAction() {
+        return view('hola/practica');
+    }
+
 }
