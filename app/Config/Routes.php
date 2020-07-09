@@ -64,6 +64,8 @@ $routes->get('/practica/productos', 'Hola_controller::practicaAction');
 
 // USER
 $routes->get('/user', 'UserController::index');
+$routes->get('/user/nuevo', 'UserController::nuevoAction');
+$routes->post('/user/guardar', 'UserController::guardarAction');
 
 /**
  * --------------------------------------------------------------------
