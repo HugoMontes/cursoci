@@ -62,6 +62,8 @@ $routes->get('/calculadora/geometrica/(:num)/(:num)', 'Calculadora_controller::c
 // TAREAS
 $routes->get('/practica/productos', 'Hola_controller::practicaAction');
 
+// USER
+$routes->get('/user', 'UserController::index');
 
 /**
  * --------------------------------------------------------------------
