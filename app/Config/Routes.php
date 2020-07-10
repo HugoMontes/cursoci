@@ -64,8 +64,13 @@ $routes->get('/practica/productos', 'Hola_controller::practicaAction');
 
 // USER
 $routes->get('/user', 'UserController::index');
-$routes->get('/user/nuevo', 'UserController::nuevoAction');
-$routes->post('/user/guardar', 'UserController::guardarAction');
+// $routes->get('/user/nuevo', 'UserController::nuevoAction');
+$routes->add('/user/guardar', 'UserController::guardarAction');
+$routes->add('/user/actualizar', 'UserController::actualizarAction');
+$routes->add('/user/eliminar/(:num)', 'UserController::eliminarAction/$1');
+
+$routes->add('/user/consultas/(:num)', 'UserController::consultasAction/$1');
+$routes->add('/user/consultas/nativa', 'UserController::nativaAction');
 
 /**
  * --------------------------------------------------------------------

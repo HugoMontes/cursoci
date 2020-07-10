@@ -18,9 +18,9 @@ class UserModel extends Model {
     // Indicar los campos a manipular al crear o actualizar
     protected $allowedFields = ['username', 'password', 'email'];
 
-    // Indicar si se gestionaran las fechas para 
+    // Indica si se gestionaran las fechas para 
     // Crear, Actualizar y Eliminar registros
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
@@ -29,4 +29,16 @@ class UserModel extends Model {
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
+
+    public function obtenerUsuarios(){
+        // Instanciar el objeto para la coneccion
+        $db = \Config\Database::connect();
+		// Realizar la consulta
+		$query = $db->query('SELECT id, username, email FROM users');
+		// Obtener los resultados como un array de objetos
+        $results = $query->getResult();
+        // Retornar el resultado
+        return $results;
+    }
+
 }
