@@ -72,6 +72,8 @@ $routes->add('/user/eliminar/(:num)', 'UserController::eliminarAction/$1');
 $routes->add('/user/consultas/(:num)', 'UserController::consultasAction/$1');
 $routes->add('/user/consultas/nativa', 'UserController::nativaAction');
 
+$routes->get('/user/new', 'UserController::newAction');
+$routes->post('/user/create', 'UserController::createAction');
 /**
  * --------------------------------------------------------------------
  * Additional Routing

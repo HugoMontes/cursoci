@@ -113,7 +113,7 @@ class UserController extends BaseController
 	}
 
 	// Mostrar formulario para ingresar nuevo registro
-	public function nuevoAction()
+	public function newAction()
 	{
 		// Llamar al helper para formularios
 		// Tambien se podria definir en el constructor
@@ -124,14 +124,16 @@ class UserController extends BaseController
 		return view('user/nuevo_view');
 	}
 
-	/*
+	
     // Funciones del modelo para guardar y actualizar
     // insert : guarda un nuevo registro
     // update : actualiza un registro
     // save : guarda y actualiza dependiendo si tiene o no id
-    public function guardarAction(){
+    public function createAction(){
         // Instanciar un objeto del modelo
-        $userModel = new UserModel();
+		$userModel = new UserModel();
+		// Instanciar un objeto session para mostrar mensajes
+		$session = \Config\Services::session();
         // Instanciar un objeto request para recibir los datos
         $request = \Config\Services::request();
         // Obtener los datos enviados del formulario
@@ -142,7 +144,11 @@ class UserController extends BaseController
         $data['password'] = MD5($request->getPostGet('password'));
         // Guardar los datos
         if($userModel->insert($data)){
-          // guardados
+			// Mensaje temporal
+			$this->session->setFlashdata('message', 'El usuario ' . $data['username'] . ' fue adicionado exitosamente.');
+			  // Direccionar al listado
+			  
+		  	return redirect()->to('/user');
         }else{
           // Mostrar mensajes de error
           var_dump($userModel->errors());
@@ -162,7 +168,6 @@ class UserController extends BaseController
           //$this->nuevo();
         //}
     }
-*/
 
 
 	// Funciones del modelo para eliminar
@@ -171,7 +176,4 @@ class UserController extends BaseController
 	// delete : elimina un registro (fisico/logico)
 	// purgeDeleted : elimina de forma fisica 
 	// los registros con valor en fecha de registro
-
-
-
 }

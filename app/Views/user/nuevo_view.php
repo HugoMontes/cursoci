@@ -1,5 +1,5 @@
 <?php echo view('templates/header'); ?>
-<?php echo form_open('/user/guardar'); ?>
+<?php echo form_open('/user/create'); ?>
 <div class="form-group">
     <?php echo form_label('Nombre de usuario:', 'txtUsername'); ?>
     <?php echo form_input(array(
