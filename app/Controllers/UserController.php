@@ -113,15 +113,14 @@ class UserController extends BaseController
 	}
 
 	// Mostrar formulario para ingresar nuevo registro
-	public function newAction()
-	{
+	public function newAction(){
 		// Llamar al helper para formularios
 		// Tambien se podria definir en el constructor
 		// o en BaseController
 		helper('form');
 		// Renderizar la vista para el formulario
 		$data['title'] = 'Nuevo Usuario';
-		return view('user/nuevo_view');
+		return view('user/nuevo_view', $data);
 	}
 
 	
@@ -140,34 +139,25 @@ class UserController extends BaseController
         $data = $request->getPostGet();
         // Mostrar los datos
         // var_dump($request->getPostGet());
-        // Cifrar el password
-        $data['password'] = MD5($request->getPostGet('password'));
+		// Cifrar el password
+		if(!is_null($request->getPostGet('password'))){
+			$data['password'] = MD5($request->getPostGet('password'));
+		}
+		// var_dump($request->getPostGet());     
         // Guardar los datos
         if($userModel->insert($data)){
 			// Mensaje temporal
-			$this->session->setFlashdata('message', 'El usuario ' . $data['username'] . ' fue adicionado exitosamente.');
+			$session->setFlashdata('message', 'El usuario ' . $data['username'] . ' fue adicionado exitosamente.');
 			  // Direccionar al listado
-			  
 		  	return redirect()->to('/user');
         }else{
-          // Mostrar mensajes de error
+          // Mostrar mensajes de error en caso que existan
           var_dump($userModel->errors());
-        }
+		}
 
-        // Se invoca al metodo de validacion
-        // $this->validarFormularioCurso();
-        // Validar el formulario
-        //if ($this->form_validation->run()){
-          // post(): Retorna datos del formulario con formato:
-          // array('nom_campo1'=>valor1,'nom_campo2'=>valor2)
-          //$data = $this->input->post();
-          // Se muestran los datos enviados desde el formulario
-          //print_r($data);
-        //}else{
-          // Si existen errores de validacion, vuelve a mostrar el formulario
-          //$this->nuevo();
-        //}
-    }
+	}
+	
+	
 
 
 	// Funciones del modelo para eliminar

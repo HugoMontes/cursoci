@@ -25,9 +25,18 @@ class UserModel extends Model {
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    // Reglas y mensajes de validacion
-    protected $validationRules    = [];
-    protected $validationMessages = [];
+    // Reglas de validacion
+    protected $validationRules    = [
+        'username' => 'required|alpha_numeric_space|min_length[3]',
+        'email' => 'required|valid_email|is_unique[users.email]',
+    ];
+    // Mensaje personalizado de validacion
+    protected $validationMessages = [
+        'email' => [
+            'is_unique' => 'El correo fue registrado anteriormente.'
+        ]
+    ];
+    // Indicar que no se salte la validacion
     protected $skipValidation     = false;
 
     public function obtenerUsuarios(){

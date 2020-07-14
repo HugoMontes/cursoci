@@ -146,4 +146,12 @@
       <div class="row">
         <div class="col-md-12">
             <div class="tile">
-            
+            <?php if(session('message')){?>
+            <div class="bs-component">
+              <div class="alert alert-dismissible alert-success">
+                <button class="close" type="button" data-dismiss="alert">×</button>
+                <strong>Correcto!</strong> 
+                <?php echo session('message'); ?>
+              </div>
+            </div>
+            <?php } ?>
