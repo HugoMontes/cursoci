@@ -1,4 +1,17 @@
 <?php echo view('templates/header'); ?>
+<!-- ?= \Config\Services::validation()->listErrors(); ? -->
+<!-- ?php $validation = \Config\Services::validation(); ? -->
+<?php $errors = \Config\Services::validation()->getErrors(); ?>
+<?php if($errors){ ?>
+<div class="alert alert-danger" role="alert">
+    <ul>
+    <?php foreach ($errors as $error) : ?>
+        <li><?= esc($error) ?></li>
+    <?php endforeach ?>
+    </ul>
+</div>
+<?php } ?>
+
 <?php echo form_open('/user/create'); ?>
 <div class="form-group">
     <?php echo form_label('Nombre de usuario:', 'txtUsername'); ?>

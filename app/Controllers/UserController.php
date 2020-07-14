@@ -128,36 +128,65 @@ class UserController extends BaseController
     // insert : guarda un nuevo registro
     // update : actualiza un registro
     // save : guarda y actualiza dependiendo si tiene o no id
-    public function createAction(){
-        // Instanciar un objeto del modelo
-		$userModel = new UserModel();
-		// Instanciar un objeto session para mostrar mensajes
-		$session = \Config\Services::session();
-        // Instanciar un objeto request para recibir los datos
-        $request = \Config\Services::request();
-        // Obtener los datos enviados del formulario
-        $data = $request->getPostGet();
-        // Mostrar los datos
-        // var_dump($request->getPostGet());
-		// Cifrar el password
-		if(!is_null($request->getPostGet('password'))){
-			$data['password'] = MD5($request->getPostGet('password'));
+    public function createAction(){ 
+		// Adicionar una condición para la validacion
+		if($this->userFormValidation()){
+			// Instanciar un objeto del modelo
+			$userModel = new UserModel();
+			// Instanciar un objeto session para mostrar mensajes
+			$session = \Config\Services::session();
+			// Instanciar un objeto request para recibir los datos
+			$request = \Config\Services::request();
+			// Obtener los datos enviados del formulario
+			$data = $request->getPostGet();
+			// Mostrar los datos
+			// var_dump($request->getPostGet());
+			// Cifrar el password
+			if(!is_null($request->getPostGet('password'))){
+				$data['password'] = MD5($request->getPostGet('password'));
+			}
+			// var_dump($request->getPostGet());     
+			// Guardar los datos
+			$userModel->insert($data);
+			// if($userModel->insert($data)){
+				// Mensaje temporal
+				$session->setFlashdata('message', 'El usuario ' . $data['username'] . ' fue adicionado exitosamente.');
+				// Direccionar al listado
+				return redirect()->to('/user');
+			// }else{
+				// Mostrar mensajes de error en caso que existan
+				// var_dump($userModel->errors());
+			// }
+		}else{
+			// Mostrar mensajes de error en caso que existan
+			// var_dump($this->validator->listErrors());
+			// $data['validation'] = $this->validator;
+			// return redirect()->to('/user/new');
+			// $this->newAction();
+			return $this->newAction();
+			// helper('form');
+			// $data['title'] = 'Nuevo Usuario';
+			// return view('user/nuevo_view', $data);
 		}
-		// var_dump($request->getPostGet());     
-        // Guardar los datos
-        if($userModel->insert($data)){
-			// Mensaje temporal
-			$session->setFlashdata('message', 'El usuario ' . $data['username'] . ' fue adicionado exitosamente.');
-			  // Direccionar al listado
-		  	return redirect()->to('/user');
-        }else{
-          // Mostrar mensajes de error en caso que existan
-          var_dump($userModel->errors());
-		}
-
 	}
 	
-	
+	// Crear una funcion que contenga la logica de validacion
+	private function userFormValidation(){
+		// Validar segun los valores name en las etiquetas del formulario
+		$val = $this->validate([
+			// Reglas de validacion
+			'username'=> 'required|alpha_numeric_space|min_length[3]',
+			'password' => 'required|min_length[6]',
+			'email'=> 'required|valid_email|is_unique[users.email]',
+		],
+		[
+			// Mensajes de regla de validacion
+			// Si desea cambiar los textos por defecto
+			'username' => ['required' => 'Es necesario ingresar un nombre de usuario'],
+			'password' => ['min_length' => 'El password es muy corto']
+		]);
+		return $val;
+	}
 
 
 	// Funciones del modelo para eliminar

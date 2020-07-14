@@ -1,5 +1,5 @@
 <?php echo view('templates/header'); ?>
-<a href="<?php echo site_url('/user/new');?>" 
+<a href="<?php echo base_url('/user/new');?>" 
    class="btn btn-primary">Nuevo Usuario</a>
 <table class="table">
     <tr>

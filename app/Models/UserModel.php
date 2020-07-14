@@ -25,7 +25,17 @@ class UserModel extends Model {
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    // Reglas de validacion
+
+    /** 
+     * REGLAS DE VALIDACION A NIVEL DE MODELO
+    */
+    protected $validationRules    = [];
+    protected $validationMessages = [];
+    protected $skipValidation     = false;
+
+
+    /*
+    // Reglas de validacion a nivel del modelo
     protected $validationRules    = [
         'username' => 'required|alpha_numeric_space|min_length[3]',
         'email' => 'required|valid_email|is_unique[users.email]',
@@ -38,6 +48,7 @@ class UserModel extends Model {
     ];
     // Indicar que no se salte la validacion
     protected $skipValidation     = false;
+    */
 
     public function obtenerUsuarios(){
         // Instanciar el objeto para la coneccion
