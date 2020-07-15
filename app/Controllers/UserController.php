@@ -267,4 +267,16 @@ class UserController extends BaseController
 		}
 	}
 
+	public function buscarAction(){
+		// Instanciar un objeto del modelo
+		$userModel = new UserModel();
+		// Buscar el usuario
+		$user = $userModel->buscarUsuario('david', '1234567');
+		// var_dump($user);
+		echo '<br/>';
+		if(!is_null($user)){
+		//	echo $user->username;
+		}		
+	}
+
 }

@@ -80,6 +80,10 @@ $routes->post('/user/update', 'UserController::updateAction');
 
 $routes->get('/user/delete/(:num)', 'UserController::deleteAction/$1');
 
+// Pruebas consultas
+$routes->get('/user/buscar', 'UserController::buscarAction/$1');
+
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
