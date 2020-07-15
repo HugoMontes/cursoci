@@ -20,8 +20,22 @@
                    title="Editar">
                    <span class="fa fa-pencil"></span>
                 </a>
+                <a href="<?php echo site_url('user/delete/' . $user->id); ?>" 
+                   class="btn btn-danger btn-sm"
+                   onclick="eliminarRegistro(event, this.href)"
+                   title="Eliminar">
+                   <span class="fa fa-trash"></span>
+                </a>
             </td>
         </tr>
     <?php } ?>
 </table>
+<script>
+    function eliminarRegistro(event, url){
+        event.preventDefault();
+        if(confirm("Esta seguro de eliminar el registro?")){
+            window.location.href = url;
+        }
+    }
+</script>
 <?php echo view('templates/footer'); ?>
