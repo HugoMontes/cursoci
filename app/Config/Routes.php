@@ -74,6 +74,10 @@ $routes->add('/user/consultas/nativa', 'UserController::nativaAction');
 
 $routes->get('/user/new', 'UserController::newAction');
 $routes->post('/user/create', 'UserController::createAction');
+
+$routes->get('/user/edit/(:num)', 'UserController::editAction/$1');
+$routes->post('/user/update', 'UserController::updateAction');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

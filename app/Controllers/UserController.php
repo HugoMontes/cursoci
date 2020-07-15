@@ -130,7 +130,7 @@ class UserController extends BaseController
     // save : guarda y actualiza dependiendo si tiene o no id
     public function createAction(){ 
 		// Adicionar una condición para la validacion
-		if($this->userFormValidation()){
+		if($this->userCreateFormValidation()){
 			// Instanciar un objeto del modelo
 			$userModel = new UserModel();
 			// Instanciar un objeto session para mostrar mensajes
@@ -142,9 +142,7 @@ class UserController extends BaseController
 			// Mostrar los datos
 			// var_dump($request->getPostGet());
 			// Cifrar el password
-			if(!is_null($request->getPostGet('password'))){
-				$data['password'] = MD5($request->getPostGet('password'));
-			}
+			$data['password'] = MD5($request->getPostGet('password'));
 			// var_dump($request->getPostGet());     
 			// Guardar los datos
 			$userModel->insert($data);
@@ -171,7 +169,7 @@ class UserController extends BaseController
 	}
 	
 	// Crear una funcion que contenga la logica de validacion
-	private function userFormValidation(){
+	private function userCreateFormValidation() {
 		// Validar segun los valores name en las etiquetas del formulario
 		$val = $this->validate([
 			// Reglas de validacion
@@ -195,4 +193,51 @@ class UserController extends BaseController
 	// delete : elimina un registro (fisico/logico)
 	// purgeDeleted : elimina de forma fisica 
 	// los registros con valor en fecha de registro
+	
+	// Mostrar formulario para editar un registro
+	public function editAction($id){
+		// Instanciar un objeto del modelo
+		$userModel = new UserModel();
+		// Llamar al helper para formularios
+		helper('form');
+		// Buscar el registro a editar
+		$data['user'] = $userModel->find($id);
+		// Renderizar la vista para el formulario
+		$data['title'] = 'Editar Usuario';
+		return view('user/editar_view', $data);
+	}
+
+	private function userEditFormValidation(){
+		// Validar segun los valores name en las etiquetas del formulario
+		$val = $this->validate([
+			// Reglas de validacion
+			'username'=> 'required|alpha_numeric_space|min_length[3]',
+			'email'=> 'required|valid_email',
+		]);
+		return $val;
+	}
+
+	public function updateAction(){ 
+		// Instanciar un objeto request para recibir los datos
+		$request = \Config\Services::request();
+		// Adicionar una condición para la validacion
+		if($this->userEditFormValidation()){
+			// Instanciar un objeto del modelo
+			$userModel = new UserModel();
+			// Instanciar un objeto session para mostrar mensajes
+			$session = \Config\Services::session();
+			// Obtener los datos enviados del formulario
+			$data = $request->getPostGet();
+			// Guardar los datos
+			$userModel->update($request->getPostGet('id'), $data);
+			// Mensaje temporal
+			$session->setFlashdata('message', 'El usuario ' . $data['username'] . ' fue editado exitosamente.');
+			// Direccionar al listado
+			return redirect()->to('/user');
+		}else{
+			// Redireccionar al formulario editar
+			return $this->editAction($request->getPostGet('id'));
+		}
+	}
+
 }
