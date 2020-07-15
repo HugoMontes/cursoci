@@ -18,10 +18,14 @@ class UserController extends BaseController
 		// Instanciar un objeto del modelo
 		$userModel = new UserModel();
 		// Obtener todos los registros
-		$users = $userModel->findAll();
+		// $users = $userModel->findAll();
 		// var_dump($users);
 		// Enviar los datos a una vista
-		$data['users'] = $users;
+		// $data['users'] = $users;
+		$data = [
+			'users' => $userModel->paginate(5, 'bootstrap'),
+			'pager' => $userModel->pager
+		];
 		$data['title'] = 'Lista de Usuarios';
 		return view('user/listar_view', $data);
 	}

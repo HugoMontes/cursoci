@@ -30,10 +30,13 @@
         </tr>
     <?php } ?>
 </table>
+
+<?php echo $pager->links('bootstrap', 'bootstrap_pagination'); ?>
+
 <script>
-    function eliminarRegistro(event, url){
+    function eliminarRegistro(event, url) {
         event.preventDefault();
-        if(confirm("Esta seguro de eliminar el registro?")){
+        if (confirm("Esta seguro de eliminar el registro?")) {
             window.location.href = url;
         }
     }
