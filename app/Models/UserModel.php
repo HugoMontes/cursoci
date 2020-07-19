@@ -62,35 +62,62 @@ class UserModel extends Model {
     }
 
     public function buscarUsuario($username, $password){
+        $db = \Config\Database::connect();
+        $builder = $db->table($this->table);
+        $builder->select('id, username, password');
+        $builder->where('username', $username);
+        $builder->where('password', MD5($password));
+        $builder->limit(1);
+        // if($builder->countAllResults()==1){
+            $query = $builder->get();
+            return $query->getRow();
+        // }
+
         // $user = $this->find(1);
         /*
         $user = $this
             ->select('id, username, password')
-            // ->from($this->table)
             ->where('username', $username)
             ->where('password', MD5($password))
             ->limit(1)
             ->get()
             // ->getResult(); // Obtiene coleccion de objetos
             ->getRow(); // Obtiene un objeto
-            return $user;
+            var_dump($user);
+            // return $user;
         */
+
+        /*
+        $build = $this
+            ->select('id, username, password')
+            // ->from($this->table)
+            ->where('username', $username)
+            ->where('password', MD5($password))
+            ->limit(1);
+            // ->get();
+            // ->getResult(); // Obtiene coleccion de objetos
+            // ->getRow(); // Obtiene un objeto
+        echo $build->countAllResults().",<br/>";
+        $query = $build->get();
+        
+        var_dump($query->getRow());
+        // return $user;
+        */
+
+        /*
         $db = \Config\Database::connect();
-        $builder = $db->table('users');
-        $builder->select('id, username, password');
-        $builder->where('username', $username);
-        $builder->where('password', MD5($password));
-        $builder->limit(1);
-
-        // Confirmar que existen registros
-        if($builder->countAllResults() > 0 ){
-
-        }
-        // Ejecutar la consulta
+        $builder = $db->table('users')
+        ->select('id, username, password')
+        ->where('username', $username)
+        ->where('password', MD5($password))
+        ->limit(1);
         $query = $builder->get();
-        echo $builder->countAllResults().",";
-
-        return null;
+        // var_dump($query->getResult());
+        var_dump($query->getRow());
+        // echo $builder->countAllResults().",<br/>";
+        // $query = $builder->get();
+        // var_dump($query->getRow()).",<br/>";
+        */        
     }
 
 }

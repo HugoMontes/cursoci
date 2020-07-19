@@ -271,12 +271,12 @@ class UserController extends BaseController
 		// Instanciar un objeto del modelo
 		$userModel = new UserModel();
 		// Buscar el usuario
-		$user = $userModel->buscarUsuario('david', '1234567');
-		// var_dump($user);
-		echo '<br/>';
+		$user = $userModel->buscarUsuario('david', '123456');
 		if(!is_null($user)){
-		//	echo $user->username;
-		}		
+			var_dump($user);
+		}else{
+			echo 'no existe el usuario';
+		}
 	}
 
 }
